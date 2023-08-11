@@ -1,15 +1,5 @@
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  Box,
-  InputRightElement,
-  InputGroup,
-  Button,
-  Text,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Box, InputRightElement, InputGroup, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
-import zxcvbn from "zxcvbn";
 
 function RegisterationForm() {
   const [fullName, setFullName] = useState("");
@@ -45,8 +35,6 @@ function RegisterationForm() {
       strengthLabel = "Stronger";
     } else if (score >= 2) {
       strengthLabel = "Strong";
-    } else {
-      strengthLabel = "Weak";
     }
 
     setPasswordStrength(strengthLabel);
@@ -70,38 +58,39 @@ function RegisterationForm() {
     <Box maxW="400px" m="auto" p="4" my="40px">
       <FormControl isRequired>
         <FormLabel>Full Name</FormLabel>
-        <Input
-          type="text"
-          value={fullName}
-          onChange={handleFullNameChange}
-          placeholder="Enter Your FullName"
+        <Input 
+        type="text"
+        value={fullName}
+        onChange={handleFullNameChange}
+        placeholder="Enter Your FullName"
         />
-      </FormControl>
+      </FormControl >
       <FormControl isRequired my="4">
         <FormLabel>Email</FormLabel>
-        <Input
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="user@example.com"
-        />
+      <Input
+      type="email"
+      value={email}
+      onChange={handleEmailChange}
+      placeholder="user@example.com"
+
+      />
       </FormControl>
       <FormControl isRequired my="4">
         <FormLabel>Password</FormLabel>
-        <InputGroup size="md">
-          <Input
-            pr="4.5rem"
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter password"
-            onChange={handlePasswordChange}
-          />
-          <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleShowPassword}>
-              {showPassword ? "Hide" : "Show"}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-        {passwordStrength && (
+        <InputGroup size='md'>
+      <Input
+        pr='4.5rem'
+        type={showPassword ? 'text' : 'password'}
+        placeholder='Enter password'
+        onChange={handleShowPasswordChange}
+      />
+      <InputRightElement width='4.5rem'>
+        <Button h='1.75rem' size='sm' onClick={handleShowPassword}>
+          {showPassword ? 'Hide' : 'Show'}
+        </Button>
+      </InputRightElement>
+    </InputGroup>
+    {passwordStrength && (
           <Text
             mt={2}
             fontSize="sm"
@@ -118,15 +107,16 @@ function RegisterationForm() {
         )}
       </FormControl>
       <Button
-        colorScheme="blue"
-        disabled={!isFormValid}
-        my="4"
-        _disabled={{ opacity: 0.7, cursor: "not-allowed" }}
-        _hover={{ transform: "scale(1.05)" }}
-        _active={{ transform: "scale(0.95)" }}
-      >
-        Register
-      </Button>
+           colorScheme="blue"
+           
+           disabled={!isFormValid}
+           my="4"
+           _disabled={{ opacity: 0.7, cursor: 'not-allowed' }}
+           _hover={{ transform: 'scale(1.05)' }}
+           _active={{ transform: 'scale(0.95)' }}
+        >
+          Register
+        </Button>
     </Box>
   );
 }
