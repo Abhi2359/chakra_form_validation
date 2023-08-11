@@ -108,7 +108,7 @@ function RegisterationForm() {
   };
 
   return (
-    <Box maxW="400px" m="auto" p="4" my="40px">
+    <Box maxW="400px" m="auto" p="4" my="40px"  bg="gray.50" borderRadius="md">
       <FormControl isRequired isInvalid={fullNameError !== ""}>
         <FormLabel>Full Name</FormLabel>
         <Input
@@ -116,6 +116,7 @@ function RegisterationForm() {
           value={fullName}
           onChange={handleFullNameChange}
           placeholder="Enter Your FullName"
+          _focus={{ borderColor: "blue.500", boxShadow: "0 0 0 2px rgba(0, 0, 255, 0.3)" }}
         />
         <Text color="red.500" fontSize="sm" mt="1">
           {fullNameError}
@@ -128,6 +129,7 @@ function RegisterationForm() {
           value={email}
           onChange={handleEmailChange}
           placeholder="user@example.com"
+          _focus={{ borderColor: "blue.500", boxShadow: "0 0 0 2px rgba(0, 0, 255, 0.3)" }}
         />
         <Text color="red.500" fontSize="sm" mt="1">
           {emailError}
@@ -141,6 +143,7 @@ function RegisterationForm() {
             type={showPassword ? "text" : "password"}
             placeholder="Enter password"
             onChange={handlePasswordChange}
+            _focus={{ borderColor: "blue.500", boxShadow: "0 0 0 2px rgba(0, 0, 255, 0.3)" }}
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleShowPassword}>
