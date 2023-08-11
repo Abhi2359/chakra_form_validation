@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import zxcvbn from "zxcvbn";
+import ModalComponent from "./Modal";
 
 function RegisterationForm() {
   const [fullName, setFullName] = useState("");
@@ -20,7 +21,7 @@ function RegisterationForm() {
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState("");
-
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [userObject, setUserObject] = useState(null);
   const handleFullNameChange = (e) => {
@@ -65,25 +66,6 @@ function RegisterationForm() {
     setShowPassword(!showPassword);
   };
 
-  // Input Field Validation Function
-  // const validateName = () => {
-  //   const isFullNameValid = /^[A-Za-z\s]+$/.test(fullName);
-
-  //   setFullNameError(isFullNameValid ? "" : "Invalid Full Name");
-  // };
-  // const validateEmail = () => {
-  //   const isEmailValid = /\S+@\S+\.\S+/.test(email);
-
-  //   setEmailError(isEmailValid ? "" : "Invalid Email");
-  // };
-  // const validatePassword = () => {
-  //   const isPasswordValid = password.length >= 8;
-
-  //   setPasswordError(
-  //     isPasswordValid ? "" : "Password must be at least 8 characters"
-  //   );
-  // };
-
   //Form Validation
   const validateForm = () => {
     const isFullNameValid = /^[A-Za-z\s]+$/.test(fullName);
@@ -114,10 +96,14 @@ function RegisterationForm() {
     e.preventDefault();
     if (isFormValid) {
       console.log("User Object:", userObject);
-      console.log("Registration successful!");
+
+      setShowSuccessModal(true);
     } else {
       console.log("Form is not valid. Please fill in all fields.");
     }
+  };
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
   };
 
   return (
@@ -181,7 +167,6 @@ function RegisterationForm() {
         )}
       </FormControl>
       <button
-      
         onClick={handleSubmit}
         disabled={!isFormValid}
         style={{
@@ -194,6 +179,11 @@ function RegisterationForm() {
       >
         Register
       </button>
+      <ModalComponent
+        isOpen={showSuccessModal}
+        onClose={handleCloseSuccessModal}
+        Name={fullName}
+      />
     </Box>
   );
 }
