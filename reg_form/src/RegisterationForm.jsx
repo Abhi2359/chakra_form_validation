@@ -7,6 +7,7 @@ import {
   InputGroup,
   Button,
   Text,
+  Flex
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import zxcvbn from "zxcvbn";
