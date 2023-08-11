@@ -22,7 +22,7 @@ function RegisterationForm() {
   const [passwordStrength, setPasswordStrength] = useState("");
 
   const [isFormValid, setIsFormValid] = useState(false);
-
+  const [userObject, setUserObject] = useState(null);
   const handleFullNameChange = (e) => {
     const value = e.target.value;
 
@@ -97,7 +97,27 @@ function RegisterationForm() {
 
     const formIsValid = isFullNameValid && isEmailValid && isPasswordValid;
     setIsFormValid(formIsValid);
+
+    if (formIsValid) {
+      setUserObject({
+        fullName: fullName,
+        email: email,
+        password: password,
+      });
+    } else {
+      setUserObject(null);
+    }
+
     return formIsValid;
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      console.log("User Object:", userObject);
+      console.log("Registration successful!");
+    } else {
+      console.log("Form is not valid. Please fill in all fields.");
+    }
   };
 
   return (
@@ -161,7 +181,8 @@ function RegisterationForm() {
         )}
       </FormControl>
       <button
-        type="submit"
+      
+        onClick={handleSubmit}
         disabled={!isFormValid}
         style={{
           backgroundColor: isFormValid ? "orange" : "gray",
