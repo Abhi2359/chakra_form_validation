@@ -84,22 +84,22 @@ function RegisterationForm() {
   //   );
   // };
 
-  //Form Validation
-  const validateForm = () => {
+
+  //Form Validation 
+  const validateForm =()=>{
     const isFullNameValid = /^[A-Za-z\s]+$/.test(fullName);
     const isEmailValid = /\S+@\S+\.\S+/.test(email);
     const isPasswordValid = password.length >= 8;
     setFullNameError(isFullNameValid ? "" : "Invalid Full Name");
     setEmailError(isEmailValid ? "" : "Invalid Email");
-    setPasswordError(
-      isPasswordValid ? "" : "Password must be at least 8 characters"
-    );
+    setPasswordError(isPasswordValid ? "" : "Password must be at least 8 characters");
 
     const formIsValid = isFullNameValid && isEmailValid && isPasswordValid;
     setIsFormValid(formIsValid);
     return formIsValid;
-  };
-
+  }
+   
+ 
   return (
     <Box maxW="400px" m="auto" p="4" my="40px">
       <FormControl isRequired isInvalid={fullNameError !== ""}>
@@ -162,11 +162,11 @@ function RegisterationForm() {
       </FormControl>
       <button
         type="submit"
+       
         disabled={!isFormValid}
         style={{
-          backgroundColor: isFormValid ? "orange" : "gray",
-          color: "black",
-          borderRadius: "5px",
+          backgroundColor: isFormValid ? "green" : "gray",
+          color: "white",
           padding: "10px",
           cursor: isFormValid ? "pointer" : "not-allowed",
         }}

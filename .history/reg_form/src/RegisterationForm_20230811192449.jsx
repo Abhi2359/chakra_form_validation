@@ -28,14 +28,14 @@ function RegisterationForm() {
 
     setFullName(value);
     setFullNameError("");
-    validateForm();
+    validateName();
   };
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
     setEmailError("");
-    validateForm();
+    validateEmail();
   };
 
   const handlePasswordChange = (e) => {
@@ -58,7 +58,7 @@ function RegisterationForm() {
 
     setPasswordStrength(strengthLabel);
 
-    validateForm();
+    validatePassword();
   };
 
   const handleShowPassword = () => {
@@ -83,23 +83,15 @@ function RegisterationForm() {
   //     isPasswordValid ? "" : "Password must be at least 8 characters"
   //   );
   // };
-
-  //Form Validation
-  const validateForm = () => {
+  //Form Validation 
+  const validateForm =()=>{
     const isFullNameValid = /^[A-Za-z\s]+$/.test(fullName);
     const isEmailValid = /\S+@\S+\.\S+/.test(email);
     const isPasswordValid = password.length >= 8;
-    setFullNameError(isFullNameValid ? "" : "Invalid Full Name");
-    setEmailError(isEmailValid ? "" : "Invalid Email");
-    setPasswordError(
-      isPasswordValid ? "" : "Password must be at least 8 characters"
-    );
-
-    const formIsValid = isFullNameValid && isEmailValid && isPasswordValid;
-    setIsFormValid(formIsValid);
-    return formIsValid;
-  };
-
+     setIsFormValid( isFullNameValid && isPasswordValid && isEmailValid)
+  }
+   
+ 
   return (
     <Box maxW="400px" m="auto" p="4" my="40px">
       <FormControl isRequired isInvalid={fullNameError !== ""}>
@@ -162,11 +154,11 @@ function RegisterationForm() {
       </FormControl>
       <button
         type="submit"
+       
         disabled={!isFormValid}
         style={{
-          backgroundColor: isFormValid ? "orange" : "gray",
-          color: "black",
-          borderRadius: "5px",
+          backgroundColor: isFormValid ? "green" : "gray",
+          color: "white",
           padding: "10px",
           cursor: isFormValid ? "pointer" : "not-allowed",
         }}

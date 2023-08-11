@@ -17,7 +17,6 @@ function RegisterationForm() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState("");
 
@@ -25,23 +24,19 @@ function RegisterationForm() {
 
   const handleFullNameChange = (e) => {
     const value = e.target.value;
-
     setFullName(value);
-    setFullNameError("");
     validateForm();
   };
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    setEmailError("");
     validateForm();
   };
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
-    setPasswordError(" ");
     // Calculate password strength using zxcvbn
     const passwordStrengthResult = zxcvbn(value);
     const score = passwordStrengthResult.score;
@@ -65,44 +60,17 @@ function RegisterationForm() {
     setShowPassword(!showPassword);
   };
 
-  // Input Field Validation Function
-  // const validateName = () => {
-  //   const isFullNameValid = /^[A-Za-z\s]+$/.test(fullName);
-
-  //   setFullNameError(isFullNameValid ? "" : "Invalid Full Name");
-  // };
-  // const validateEmail = () => {
-  //   const isEmailValid = /\S+@\S+\.\S+/.test(email);
-
-  //   setEmailError(isEmailValid ? "" : "Invalid Email");
-  // };
-  // const validatePassword = () => {
-  //   const isPasswordValid = password.length >= 8;
-
-  //   setPasswordError(
-  //     isPasswordValid ? "" : "Password must be at least 8 characters"
-  //   );
-  // };
-
-  //Form Validation
+  // Form Validation Function
   const validateForm = () => {
     const isFullNameValid = /^[A-Za-z\s]+$/.test(fullName);
     const isEmailValid = /\S+@\S+\.\S+/.test(email);
     const isPasswordValid = password.length >= 8;
-    setFullNameError(isFullNameValid ? "" : "Invalid Full Name");
-    setEmailError(isEmailValid ? "" : "Invalid Email");
-    setPasswordError(
-      isPasswordValid ? "" : "Password must be at least 8 characters"
-    );
-
-    const formIsValid = isFullNameValid && isEmailValid && isPasswordValid;
-    setIsFormValid(formIsValid);
-    return formIsValid;
+    setIsFormValid(isFullNameValid && isEmailValid && isPasswordValid);
   };
 
   return (
     <Box maxW="400px" m="auto" p="4" my="40px">
-      <FormControl isRequired isInvalid={fullNameError !== ""}>
+      <FormControl isRequired>
         <FormLabel>Full Name</FormLabel>
         <Input
           type="text"
@@ -110,11 +78,8 @@ function RegisterationForm() {
           onChange={handleFullNameChange}
           placeholder="Enter Your FullName"
         />
-        <Text color="red.500" fontSize="sm" mt="1">
-          {fullNameError}
-        </Text>
       </FormControl>
-      <FormControl isRequired my="4" isInvalid={emailError !== ""}>
+      <FormControl isRequired my="4">
         <FormLabel>Email</FormLabel>
         <Input
           type="email"
@@ -122,11 +87,8 @@ function RegisterationForm() {
           onChange={handleEmailChange}
           placeholder="user@example.com"
         />
-        <Text color="red.500" fontSize="sm" mt="1">
-          {emailError}
-        </Text>
       </FormControl>
-      <FormControl isRequired my="4" isInvalid={passwordError !== ""}>
+      <FormControl isRequired my="4">
         <FormLabel>Password</FormLabel>
         <InputGroup size="md">
           <Input
@@ -141,9 +103,6 @@ function RegisterationForm() {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <Text color="red.500" fontSize="sm" mt="1">
-          {passwordError}
-        </Text>
         {passwordStrength && (
           <Text
             mt={2}
@@ -160,19 +119,16 @@ function RegisterationForm() {
           </Text>
         )}
       </FormControl>
-      <button
-        type="submit"
+      <Button
+        colorScheme="blue"
         disabled={!isFormValid}
-        style={{
-          backgroundColor: isFormValid ? "orange" : "gray",
-          color: "black",
-          borderRadius: "5px",
-          padding: "10px",
-          cursor: isFormValid ? "pointer" : "not-allowed",
-        }}
+        my="4"
+        _disabled={{ opacity: 0.7, cursor: "not-allowed" }}
+        _hover={{ transform: "scale(1.05)" }}
+        _active={{ transform: "scale(0.95)" }}
       >
         Register
-      </button>
+      </Button>
     </Box>
   );
 }
