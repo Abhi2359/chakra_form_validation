@@ -15,9 +15,11 @@ This is a React component that implements a user registration form using Chakra 
 
 ## Installation
 
-1. Clone the repository using : git clone https://github.com/Abhi2359/chakra_form_validation.git
-2.  Go to the directory: cd reg_form
-3. Install the dependencies: npm install
-4. Run the project locally: npm run dev
+1. Clone the repository using : git clone https://github.com/Abhi2359/chakra_form_validation.git .
+2. Make sure to put . at last in previous clone command
+3. Run the command it will say cloning into '.'
+4.  Go to the directory: cd reg_form
+5. Install the dependencies: npm install
+6. Run the project locally: npm run dev
  
 
